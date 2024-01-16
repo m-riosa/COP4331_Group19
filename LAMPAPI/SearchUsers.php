@@ -12,9 +12,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Users where Name like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("sss", $firstName, $lastName, $inData["userId"]);
+		$stmt = $conn->prepare("SELECT * from Users where Login=?");
+		$colorName = "%" . $inData["login"] . "%";
+		//$stmt->bind_param("sss", $firstName, $lastName, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -25,7 +25,7 @@
 			{
 				$searchResults .= ",";
 			}
-			$searchCount++;
+			// $searchCount++;
 			$searchResults .= '"' . $row["Name"] . '"';
 		}
 		
