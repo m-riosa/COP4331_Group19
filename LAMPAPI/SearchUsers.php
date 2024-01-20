@@ -13,8 +13,8 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT * from Users where Login=?");
-		$colorName = "%" . $inData["login"] . "%";
-		//$stmt->bind_param("sss", $firstName, $lastName, $inData["userId"]);
+		$userName = "%" . $inData["login"] . "%";
+		$stmt->bind_param("s", $inData["login"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -25,8 +25,9 @@
 			{
 				$searchResults .= ",";
 			}
-			// $searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
+			 $searchCount++;
+			 $searchResults .= '{"FirstName" : "' . $row["FirstName"]. '", "LastName" : "' . $row["LastName"]. '", "Login" : "' . $row["Login"]. '"}';
+
 		}
 		
 		if( $searchCount == 0 )
