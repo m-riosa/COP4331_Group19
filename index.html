@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	
+	<style>
+		.hidden {
+			display : none; 
+		}
+	</style>
+
+</head>
+<body>
+
+<h1 id="title">Contact Manager</h1>
+
+<div id="loginDiv">
+	<div id="loginSect" class="visible">
+		<span id="inner-title">Please Log In</span>
+		<input type="text" id="loginName" placeholder="Username" /><br />
+		<input type="password" id="loginPassword" placeholder="Password"/><br />
+		<div class="buttons-container">
+			<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Log In </button>
+			<!-- span id="sub-title">Don't have an account? Register Below!</span> -->
+			<!-- span id="customSpace"></span> -->
+			<!-- <button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button> -->
+			<button type="button" id="registerToggleButton" class="buttons" onclick="toggleForm('registerSect');"> Register</button>
+		</div>
+		<span id="loginResult"></span>
+	</div>
+
+	<div id="registerSect" class="hidden">
+		<span id="inner-title">PLEASE REGISTER</span>
+		<input type="registerText" id="firstName" placeholder="First Name" /><br />
+		<input type="registerText" id="lastName" placeholder="Last Name" /><br />
+		<input type="registerText" id="registerUser" placeholder="Username" /><br />
+		<input type="registerText" id="registerPassword" placeholder="Password" /><br />
+		<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button>
+		<span id="sub-title">Already have an account? Login Below!</span>
+		<span id="customSpace"></span>
+		<button type="button" id="loginToggleButton" class="buttons" onclick="toggleForm('loginSect');"> Log In </button>
+   		<span id="registerResult"></span>
+	</div>
+</div>
+
+<script>
+	function toggleForm(formType){
+		document.getElementById('loginSect').classList.toggle('hidden');
+		document.getElementById('registerSect').classList.toggle('hidden');
+	}
+	
+</script>
+</body>
+</html>
