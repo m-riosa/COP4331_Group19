@@ -1,0 +1,181 @@
+<html>
+<head>
+	<title>Palms & People</title>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+	<link href="css/contacts.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Sonsie+One&family=Trispace&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap'" rel="stylesheet">
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() 
+	{
+		readCookie();
+	}, false);
+	</script>
+
+	<style>
+	.hidden {
+		display : none; 
+	}
+	</style>
+
+	<link rel = "icon" href = "favicon.ico.png">
+
+</head>
+<body>
+
+	<!-- tree bkgrnd-->
+<div class="col-md-6">
+	<div class="tree"></div>
+	<div class="tree sec"></div>
+</div>
+
+<!--nav bar-->
+<nav class="navbar navbar-fixed-top">
+	<div class="container-fluid d-flex justify-content-between align-items-center">
+		<div>
+			<div id ="navTitle">Palms and People</div>
+		</div>
+		<div>
+			<button class="btn btn-outline-light logoutButton" onclick="doLogout();"> Log Out </button>
+		</div>
+	</div>
+</nav>
+
+<!--contact container -->
+<div class = "wrap">
+	<div id="userSearchCont">
+		<div id="userCont">
+			<span id="userName"></span><br />
+		</div>
+	
+		<div id="searchContact" class ="visible">
+			<div class="searchBar">
+				<input type="searchText" id="searchText" placeholder="Search for Contact"/>
+			</div>
+			<div id="searchAndAddContacts" class="button-container">
+				<button type="button" id="searchContactButton" class="searchButton" onclick="searchContact();"> Search Contact </button><br />
+				<button type="button" id="addContactToggleButton" class="addButton" onclick="toggleForm('searchContact')"> Add Contact</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="in-bet">
+		<span id="contactSearchResult"></span>
+		<p id="contactList">
+		</p><br /><br />
+	</div>	
+
+	<div id="contactsAndPageButtons">
+		<div id="contactContainer" class="visible"></div>
+		<div id="pageButtons"></div>
+	</div>
+</div>
+
+<!-- add contact div (is hidden unless user prompts it open)-->
+<div id="addContact" class="hidden">
+	<div class="addInp">
+		<div id="addHeader">Add Contact Form</div>
+		<input type="addText" id="contactFirstName" placeholder="First Name"></br>
+		<span class= "addResultText" id="addFirstNameResult"></span>
+		<input type="addText" id="contactLastName" placeholder="Last Name"></br>
+		<span class= "addResultText" id="addLastNameResult"></span>
+		<input type="addText" id="contactPhone" placeholder="XXX-XXX-XXXX"></br>
+		<span class= "addResultText" id="addPhoneResult"></span>
+		<input type="addText" id="contactEmail" placeholder="name@email.com"></br>
+		<span class= "addResultText" id="addEmailResult"></span>
+		<span id="contactAddResult"></span>
+		<div class="button-container addSect">
+			<button type="button" id="addContactButton" class="addSectButtons" onclick="addContact();"> Add Contact</button>
+			<button type="button" id="return" class="addSectButtons" onclick="toggleForm('addContact')">Return</button>
+		</div>
+		<span id="contactAddResult"></span>
+	</div>
+</div>
+
+
+
+<script>
+
+function clearErrorMessage(elementId) {
+    document.getElementById(elementId).innerHTML = "";
+}
+
+document.getElementById("contactFirstName").addEventListener("input", function() {
+    clearErrorMessage("addFirstNameResult");
+});
+
+document.getElementById("contactLastName").addEventListener("input", function() {
+    clearErrorMessage("addLastNameResult");
+});
+
+document.getElementById("contactPhone").addEventListener("input", function() {
+    clearErrorMessage("addPhoneResult");
+});
+
+document.getElementById("contactEmail").addEventListener("input", function() {
+    clearErrorMessage("addEmailResult");
+
+});
+
+	//clear the 'conatct has been added' message when returning
+	document.getElementById("return").addEventListener('click', function(){
+		clearContactAddResult();
+	});
+
+	function clearContactAddResult(){
+		document.getElementById("contactAddResult").innerHTML = "";
+	}
+
+	//clearing the input fields once the user leaves the add contact div 
+	function clearAddInput(){
+		document.getElementById('contactFirstName').value ='';
+		document.getElementById('contactLastName').value ='';
+		document.getElementById('contactPhone').value ='';
+		document.getElementById('contactEmail').value ='';
+	}
+
+	document.getElementById('return').addEventListener('click', function(){
+   		clearAddInput();
+	});
+
+
+	//if a user hits enter on the serach bar the search function will run 
+	var input = document.getElementById("searchText");
+	input.addEventListener("keypress", function(event) 
+	{
+		if(event.key === "Enter")
+		{
+			event.preventDefault();
+			document.getElementById("searchContactButton").click();
+		}
+	});
+
+	//for the changing into the add contact div 
+	function toggleForm(formType){
+		document.getElementById('searchContact').classList.toggle('hidden');
+		document.getElementById('userCont').classList.toggle('hidden');
+		document.getElementById('in-bet').classList.toggle('hidden');
+		document.getElementById('userSearchCont').classList.toggle('hidden');
+		document.getElementById('addContact').classList.toggle('hidden');
+		document.getElementById('contactsAndPageButtons').classList.toggle('hidden');
+		
+		document.getElementById('wrap').classList.toggle('wrap');
+
+		document.getElementById("contactAddResult").innerHTML = "";
+
+		if (contacts.length > 0){
+			createContactBoxes();
+			createPageNumbers();
+		}
+	}
+
+	window.onload = function()  {
+		initializeContacts();
+	}
+</script>
+
+</body>
+</html>

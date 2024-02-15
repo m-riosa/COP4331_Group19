@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palms & People</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">   
+    <link href="css/index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sonsie+One&family=Trispace&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap'" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-TX+ua9I7PqOBkPdLGB2CEw7BB23teOgoosaz7CmY1+sL12xw4AOPqDNJ9a70Q+z2" crossorigin="anonymous">
+
+    <link rel = "icon" href = "favicon.ico.png">
+
+</head>
+<body>
+
+<div class ="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="tree"></div>
+            <div class="tree sec"></div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="align-container">
+                <h1 id="title">Palms and People</h1>
+            </div>
+        </div>
+
+        <div id="cnt" class="align-container">
+            <div class="loginDiv">
+                <div id="loginRegCont">
+                     <div id="loginSect" >
+                     <span id="inner-title"> Log In</span>
+                         <div class="input">
+                            <input type="text" id="loginName" placeholder="Username" /><br />
+                            <input type="password" id="loginPassword" placeholder="Password"/><br />
+                        </div>
+
+                         <div class="buttons-container">
+                            <div id="btn"></div>
+                            <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Log In </button>
+                            <button type="button" id="registerToggleButton" class="buttons" onclick="toggleLoginSection();"> Register</button>
+                         </div>
+                         <span id="loginResult"></span>
+                    </div>
+            
+                
+                     <div id="registerSect">
+                        <span id="sub-title">Register</span>
+                         <div class="input">
+                            <input type="registerText" id="firstName" placeholder="First Name" required/><br />
+                              <span class= "registerResultText" id="registerFirstNameResult"></span>
+                              <input type="registerText" id="lastName" placeholder="Last Name" required/><br />
+                              <span class= "registerResultText" id="registerLastNameResult"></span>
+                              <input type="registerText" id="registerUser" placeholder="Username" required /><br />
+                             <span class= "registerResultText" id="registerUsernameResult"></span>
+                             <input type="registerText" id="registerPassword" placeholder="Password" required/><br />
+                             <span class= "registerResultText" id="registerPasswordResult"></span>
+                             <span id="registerResult"></span>
+                        </div>
+					
+                         <div class="buttons-container">
+                             <button type="button" id="loginToggleButton" class="buttons register" onclick="toggleRegisterSection();"> Log In </button>
+                             <button type="button" id="registerButton" class="buttons register" onclick="doRegister();"> Register </button>
+                             <span id="registerResult"></span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+//if a user gets the error that they are msising input once they correct their mistake the error messages goes away 
+function clearErrorMessage(elementId) {
+    document.getElementById(elementId).innerHTML = "";
+}
+
+document.getElementById("firstName").addEventListener("input", function() {
+    clearErrorMessage("registerFirstNameResult");
+});
+
+document.getElementById("lastName").addEventListener("input", function() {
+    clearErrorMessage("registerLastNameResult");
+});
+
+document.getElementById("registerUser").addEventListener("input", function() {
+    clearErrorMessage("registerUsernameResult");
+});
+
+document.getElementById("registerPassword").addEventListener("input", function() {
+    clearErrorMessage("registerPasswordResult");
+});
+
+document.getElementById("loginToggleButton").addEventListener('click', function(){
+    clearErrorMessage("registerFirstNameResult");
+    clearErrorMessage("registerLastNameResult");
+    clearErrorMessage("registerUsernameResult");
+    clearErrorMessage("registerPasswordResult");
+});
+
+
+//clear log in/register messages when leaving those screens 
+document.getElementById("registerToggleButton").addEventListener('click', function(){
+	clearRegResult();
+});
+
+function clearRegResult(){
+	document.getElementById("loginResult").innerHTML = "";
+}
+
+ document.getElementById("loginToggleButton").addEventListener('click', function(){
+	clearLogResult();
+});
+
+function clearLogResult(){
+	document.getElementById("registerResult").innerHTML = "";
+}
+
+
+//clearing the log in fields once the user chooses to register information 
+function clearLogInput (){
+    document.getElementById('loginName').value = '';
+    document.getElementById('loginPassword').value = '';
+}
+
+document.getElementById('registerToggleButton').addEventListener('click', function(){
+    clearLogInput();
+});
+
+
+//clears the register fields if a user chooses to log in
+function clearRegisterInput (){
+    document.getElementById('firstName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('registerUser').value = '';
+    document.getElementById('registerPassword').value = '';
+}
+
+document.getElementById('loginToggleButton').addEventListener('click', function(){
+    clearRegisterInput();
+});
+
+
+//if user inputs enter on either the log in or password fields, it continues
+var input = document.getElementById("loginPassword");
+input.addEventListener("keypress", function(event) 
+{
+	if(event.key === "Enter")
+	{
+		event.preventDefault();
+		document.getElementById("loginButton").click();
+	}
+});
+
+var input = document.getElementById("registerPassword");
+input.addEventListener("keypress", function(event) 
+{
+	if(event.key === "Enter")
+	{
+		event.preventDefault();
+		document.getElementById("registerButton").click();
+	}
+});
+
+document.getElementById('loginToggleButton').addEventListener('click', toggleLoginSection);
+document.getElementById('registerToggleButton').addEventListener('click', toggleRegisterSection);
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('registerDiv').style.visibility = 'hidden';
+});
+
+//sliding between log in and regsiter input fields 
+function toggleLoginSection() {
+    document.getElementById('loginSect').style.transform = 'translateX(0%)';
+    document.getElementById('registerSect').style.transform = 'translateX(200%)';
+    document.getElementById('registerDiv').style.visibility = 'hidden';
+    document.getElementById('cnt').classList.remove('register-mode'); 
+}
+
+function toggleRegisterSection() {
+    document.getElementById('loginSect').style.transform = 'translateX(-200%)';
+    document.getElementById('registerSect').style.transform = 'translateX(-100%)';
+    document.getElementById('registerDiv').style.visibility = 'visible';
+    document.getElementById('cnt').classList.add('register-mode'); 
+}
+
+    
+</script>
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-pzjw8f+ua/C9mT68WBxlQ9XXAJy9q7ome4aCt+uXa/8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-Bm51ZegQhqYhCzG+uENB6uJ3w+4C80jQZvjwqcBCSjBwt8Zo+vnY4apO+U3WAafD" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-LVlRRUdWdrJPt6ZELh9wjL8Ks8FsG6tL23R+2PeN7s1jE5QSZEr+C5yHV8Q9IEsZ" crossorigin="anonymous"></script>
+</body>
+</html>

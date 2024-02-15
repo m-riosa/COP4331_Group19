@@ -1,0 +1,262 @@
+/* body format */
+body 
+{
+    background-color: #b47dac;
+    background-attachment: fixed;
+    background-size : cover;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+
+#title
+{
+    display : flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    font-size: 4.75em;
+    width: 100%;
+    margin: 2% 5%;
+    align-items: center;
+    text-align: center ;
+    color: #ffffff;
+    
+}
+
+#inner-title{
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    font-size: 0.55em;
+    width: 100%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#sub-title{
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    font-size: 0.55em;
+    width: 100%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#loginSect, #registerSect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    transition: transform 0.5s ease-in-out;
+}
+
+#loginRegCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200%;
+}
+
+.loginDiv{
+    background-color: #4F112F;
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    padding: 20px;
+    font-size: 60px;
+    max-width: 550px;
+    opacity: 90%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/*for sliding animation of the register/login fields*/
+#registerSect {
+    transform: translateX(80%);
+}
+
+#cnt.register-mode #loginSect {
+    transform: translateX(200%);
+}
+  
+#cnt.register-mode #registerSect {
+    transform: translateX(0%);
+    visibility: visible;
+}
+
+/* if user/pass does not match */
+#loginResult{
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 0.35em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Poppins', sans-serif;
+    color: #da5d83;
+}
+
+/* result of incorrect register fields */
+.registerResultText{
+    display: inline-block;
+    color:  #da5d83;;
+    font-size: 14;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.35em;
+}
+
+::selection{
+    background:#c4438e;
+    color: #fff;
+}
+
+/* for login/register buttons!*/
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.buttons
+{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    font-size: 25px;
+    border-radius: 0px;
+    width: auto;
+    margin: 0;
+    padding: 15px;
+    display: block;
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 2px;
+    white-space: nowrap;
+    text-align: center;
+    color: #ffffff;
+    background: -webkit-linear-gradient(left, #c4438e, #6d1c42);
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+
+.buttons:hover{
+ transform: scale(1.1);
+ background-color: #8d1d4f;
+}
+
+.buttons.register{
+   margin-top: 30px;
+}
+
+.align-container
+{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+.hidden 
+{
+    transform: translateX(100%);
+}
+
+.input{
+    width: 100%;
+}
+
+.input:focus{
+    border-color:#c4438e;
+}
+
+/*if a user already exists*/
+#registerResult{
+    display: inline-block;
+    text-align: center;
+    color: #ffffff;;
+    font-size: 14;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.35em;
+    margin-top: 20px;
+}
+
+.tree{
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    width: 100vw; 
+    height: 100vh; 
+    background: url('../images/tree.webp') no-repeat center/contain;
+    background-size: cover;
+    transform: translate(-50%, -50%);
+    animation: swayAnimation 6s ease-in-out infinite alternate;
+    z-index : -1;
+}
+
+.tree.sec{
+    top: 55%;
+    left: 50%;
+    background: url('../images/sectree.webp') no-repeat center/contain;
+    background-size: cover;
+    animation: swayAnimation 7s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+input[type="text"],input[type="password"]{
+    display: inline-block;
+    border-radius: 25px;
+    text-align: center;
+    width: 95%;
+    height: 100%;
+    padding-left: 15px;
+    margin-bottom: 8%;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+input[type="registerText"]{
+    display: inline-block;
+    border-radius: 25px;
+    text-align: center;
+    width: 95%;
+    height: 100%;
+    padding-left:15px;
+    margin-bottom: 4%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+
+@keyframes swayAnimation {
+     0% {
+        transform: translate(-50%, -50%) translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translate(-50%, -50%) translateX(1px) rotate(0.5deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateX(0) rotate(0deg);
+    }
+    75% {
+        transform: translate(-50%, -50%) translateX(-1px) rotate(-0.5deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(0) rotate(0deg);
+    }
+  }
